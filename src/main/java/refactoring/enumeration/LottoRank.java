@@ -38,9 +38,13 @@ public enum LottoRank {
     }
 
     public static LottoRank getRank(int match, boolean isBonus) {
+        if (match == THIRD.match && isBonus) {
+            return SECOND;
+        }
+
         return ALL_LOTTO_RANK.stream()
-                .filter(lottoRank -> lottoRank.match == match && lottoRank.isBonus == isBonus)
-                .findFirst()
+                .filter(lottoRank -> lottoRank.match == match)
+                .findAny()
                 .orElse(ZERO);
     }
 
