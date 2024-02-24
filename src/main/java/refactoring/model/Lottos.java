@@ -34,13 +34,13 @@ public class Lottos {
     }
 
     public Map<LottoRank, Integer> getWinnerNumberMatchCount(Lotto winLotto, LottoNumber bonus) {
-        Map<LottoRank, Integer> winnerBoard = LottoRank.initialize();
+        Map<LottoRank, Integer> ranks = LottoRank.initialize();
         for (Lotto lotto : this.lottos) {
             LottoRank lottoRank = lotto.findRank(winLotto, bonus);
-            winnerBoard.put(lottoRank, winnerBoard.get(lottoRank) + 1);
+            ranks.put(lottoRank, ranks.get(lottoRank) + 1);
         }
 
-        return winnerBoard;
+        return ranks;
     }
 
     public List<Lotto> getLottos() {
