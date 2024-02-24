@@ -1,6 +1,6 @@
 package refactoring.strategy;
 
-import test.model.LottoNumbers;
+import refactoring.model.LottoNumbers;
 
 public interface LottoGenerateStrategy {
 

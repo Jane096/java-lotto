@@ -1,7 +1,7 @@
 package refactoring.strategy;
 
-import test.model.LottoNumber;
-import test.model.LottoNumbers;
+import refactoring.model.LottoNumber;
+import refactoring.model.LottoNumbers;
 
 import java.util.HashSet;
 import java.util.List;
