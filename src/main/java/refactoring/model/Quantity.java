@@ -6,7 +6,14 @@ public class Quantity {
     private final int quantity;
 
     private Quantity(int quantity) {
+        validate(quantity);
         this.quantity = quantity;
+    }
+
+    private void validate(int quantity) {
+        if (quantity < 1) {
+            throw new IllegalArgumentException("음수는 입력할 수 없습니다.");
+        }
     }
 
     public static Quantity of(Price payPrice) {
