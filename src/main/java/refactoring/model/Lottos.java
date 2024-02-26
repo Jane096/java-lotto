@@ -25,6 +25,10 @@ public class Lottos {
         return new Lottos(lottos);
     }
 
+    public static Lottos of(List<Lotto> lottos) {
+        return new Lottos(lottos);
+    }
+
     public static Lottos getAll(Lottos autoLottos, Lottos manualLottos) {
         List<Lotto> lottos = new ArrayList<>();
         lottos.addAll(autoLottos.getLottos());
