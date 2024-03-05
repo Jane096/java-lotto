@@ -1,6 +1,5 @@
 package refactoring.controller;
 
-import refactoring.model.Lottos;
 import refactoring.model.*;
 import refactoring.strategy.AutoLottoGenerateStrategy;
 import refactoring.view.InputView;
@@ -27,9 +26,9 @@ public class LottoRefactoringController {
 
         Lotto winLotto = inputView.putLastWinNumbers();
         BonusNumber bonus = new BonusNumber(inputView.bonusNumberInput());
-        LottoRanks lottoRanks = LottoRanks.of(allLottos.getWinnerNumberMatchCount(winLotto, bonus));
+        LottoRanks lottoRanks = LottoRanks.finalRanks(winLotto, bonus, allLottos);
         outputView.viewLottoRating(lottoRanks.getRank());
 
-        outputView.viewRating(lottoRanks.getRating(payPrice.getPrice(), lottoRanks.getRank()));
+        outputView.viewRating(new Rating(payPrice).getRating(lottoRanks.getRank()));
     }
 }
