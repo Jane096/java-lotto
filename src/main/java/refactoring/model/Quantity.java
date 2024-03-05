@@ -3,6 +3,7 @@ package refactoring.model;
 public class Quantity {
 
     private static final int EACH_LOTTO_PRICE = 1000;
+
     private final int quantity;
 
     private Quantity(int quantity) {
