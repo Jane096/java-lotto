@@ -15,7 +15,8 @@ import java.util.List;
 import java.util.Map;
 import java.util.stream.Stream;
 
-import static org.assertj.core.api.Assertions.assertThat;
+import static org.junit.jupiter.api.Assertions.assertAll;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static refactoring.view.InputView.split;
 
 public class LottoRanksTest {
@@ -49,8 +50,10 @@ public class LottoRanksTest {
     void getWinnerNumberMatchCountTest(Lottos lottos, Lotto winLotto, BonusNumber bonus, Map<LottoRank, Integer> expectedRanks) {
         LottoRanks resultRanks = LottoRanks.finalRanks(winLotto, bonus, lottos);
 
-        assertThat(resultRanks.getRank().get(LottoRank.SECOND)).isEqualTo(expectedRanks.get(LottoRank.SECOND));
-        assertThat(resultRanks.getRank().get(LottoRank.FOURTH)).isEqualTo(expectedRanks.get(LottoRank.FOURTH));
-        assertThat(resultRanks.getRank().get(LottoRank.FIFTH)).isEqualTo(expectedRanks.get(LottoRank.FIFTH));
+        assertAll(
+                () -> assertEquals(resultRanks.getRank().get(LottoRank.SECOND), expectedRanks.get(LottoRank.SECOND)),
+                () -> assertEquals(resultRanks.getRank().get(LottoRank.FOURTH), expectedRanks.get(LottoRank.FOURTH)),
+                () -> assertEquals(resultRanks.getRank().get(LottoRank.FIFTH), expectedRanks.get(LottoRank.FIFTH))
+        );
     }
 }
