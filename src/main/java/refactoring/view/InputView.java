@@ -1,13 +1,10 @@
 package refactoring.view;
 
 import refactoring.model.*;
-import refactoring.strategy.ManualLottoGenerationStrategy;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 import java.util.Scanner;
-import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
 public class InputView {
@@ -35,13 +32,6 @@ public class InputView {
         return scanner.nextInt();
     }
 
-    public static List<Integer> split(String value){
-        return Arrays.stream(value.split(","))
-                .map(Integer::parseInt)
-                .collect(Collectors.toList());
-    }
-
-
     public Quantity manualLottoQuantityInput() {
         scanner.nextLine();
         System.out.println(MANUAL_LOTTO_COUNT);
@@ -62,6 +52,6 @@ public class InputView {
     }
 
     private Lotto generateWinnerLotto(String value){
-        return new Lotto(new ManualLottoGenerationStrategy(split(value)).generate());
+        return WinLotto.make(value);
     }
 }

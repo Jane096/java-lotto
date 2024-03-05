@@ -3,9 +3,9 @@ package refactoring.model;
 import refactoring.strategy.ManualLottoGenerationStrategy;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
-import java.util.stream.Collectors;
+
+import static refactoring.constants.SplitStringUtils.split;
 
 public class ManualLotto {
 
@@ -24,11 +24,5 @@ public class ManualLotto {
                 });
 
         return lottos;
-    }
-
-    private static List<Integer> split(String value){
-        return Arrays.stream(value.split(","))
-                .map(Integer::parseInt)
-                .collect(Collectors.toList());
     }
 }

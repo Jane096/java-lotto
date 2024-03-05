@@ -5,10 +5,7 @@ import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
 import refactoring.enumeration.LottoRank;
-import refactoring.model.BonusNumber;
-import refactoring.model.Lotto;
-import refactoring.model.LottoRanks;
-import refactoring.model.Lottos;
+import refactoring.model.*;
 import refactoring.strategy.ManualLottoGenerationStrategy;
 
 import java.util.List;
@@ -17,7 +14,7 @@ import java.util.stream.Stream;
 
 import static org.junit.jupiter.api.Assertions.assertAll;
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static refactoring.view.InputView.split;
+import static refactoring.constants.SplitStringUtils.split;
 
 public class LottoRanksTest {
 
@@ -37,7 +34,7 @@ public class LottoRanksTest {
                                         new Lotto(new ManualLottoGenerationStrategy(split("34,35,36,7,45,11")).generate()))
                         ),
 
-                        new Lotto(new ManualLottoGenerationStrategy(split("34,35,36,7,23,3")).generate()),
+                        WinLotto.make("34,35,36,7,23,3"),
                         new BonusNumber(1),
                         finalRanks
                 )

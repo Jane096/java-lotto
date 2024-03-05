@@ -13,8 +13,8 @@ import refactoring.strategy.ManualLottoGenerationStrategy;
 import java.util.stream.Stream;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static refactoring.constants.SplitStringUtils.split;
 import static refactoring.enumeration.LottoRank.*;
-import static refactoring.view.InputView.split;
 
 public class LottoTest {
 
