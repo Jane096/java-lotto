@@ -26,7 +26,7 @@ public class LottoRefactoringController {
         outputView.viewLotto(allLottos);
 
         Lotto winLotto = inputView.putLastWinNumbers();
-        LottoNumber bonus = LottoNumber.of(inputView.bonusNumberInput());
+        BonusNumber bonus = new BonusNumber(inputView.bonusNumberInput());
         LottoRanks lottoRanks = LottoRanks.of(allLottos.getWinnerNumberMatchCount(winLotto, bonus));
         outputView.viewLottoRating(lottoRanks.getRank());
 

@@ -24,10 +24,6 @@ public class LottoNumbers {
                 .count();
     }
 
-    public boolean isBonusMatched(LottoNumber bonus) {
-        return this.numbers.contains(bonus);
-    }
-
     public Set<LottoNumber> getNumbers() {
         return Collections.unmodifiableSet(this.numbers);
     }

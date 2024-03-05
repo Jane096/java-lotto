@@ -37,7 +37,7 @@ public class Lottos {
         return new Lottos(lottos);
     }
 
-    public Map<LottoRank, Integer> getWinnerNumberMatchCount(Lotto winLotto, LottoNumber bonus) {
+    public Map<LottoRank, Integer> getWinnerNumberMatchCount(Lotto winLotto, BonusNumber bonus) {
         Map<LottoRank, Integer> ranks = LottoRank.initialize();
         for (Lotto lotto : this.lottos) {
             LottoRank lottoRank = LottoRanks.findRank(winLotto, bonus, lotto.getLottoNumbers());

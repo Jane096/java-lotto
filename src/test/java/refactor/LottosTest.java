@@ -6,8 +6,8 @@ import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
 import org.junit.jupiter.params.provider.ValueSource;
 import refactoring.enumeration.LottoRank;
+import refactoring.model.BonusNumber;
 import refactoring.model.Lotto;
-import refactoring.model.LottoNumber;
 import refactoring.model.Lottos;
 import refactoring.strategy.AutoLottoGenerateStrategy;
 import refactoring.strategy.ManualLottoGenerationStrategy;
@@ -38,7 +38,7 @@ public class LottosTest {
                 ),
 
                 new Lotto(new ManualLottoGenerationStrategy(split("34,35,36,7,23,3")).generate()),
-                LottoNumber.of(1),
+                new BonusNumber(1),
                 finalRanks
             )
         );
@@ -55,7 +55,7 @@ public class LottosTest {
     @ParameterizedTest
     @MethodSource("generateData")
     @DisplayName("생성 된 로또의 당첨번호를 매칭하여 각 등급별 카운트 수를 리턴한다.")
-    void getWinnerNumberMatchCountTest(Lottos lottos, Lotto winLotto, LottoNumber bonus, Map<LottoRank, Integer> expectedRanks) {
+    void getWinnerNumberMatchCountTest(Lottos lottos, Lotto winLotto, BonusNumber bonus, Map<LottoRank, Integer> expectedRanks) {
         Map<LottoRank, Integer> resultRanks = lottos.getWinnerNumberMatchCount(winLotto, bonus);
 
         assertThat(resultRanks.get(LottoRank.SECOND)).isEqualTo(expectedRanks.get(LottoRank.SECOND));

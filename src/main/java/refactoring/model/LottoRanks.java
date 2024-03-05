@@ -26,9 +26,9 @@ public class LottoRanks {
         return Math.floor(price.getPrice() * 100.0 / payPrice) / 100;
     }
 
-    public static LottoRank findRank(Lotto winnerLotto, LottoNumber bonus, LottoNumbers lottoNumbers) {
+    public static LottoRank findRank(Lotto winnerLotto, BonusNumber bonus, LottoNumbers lottoNumbers) {
         int match = lottoNumbers.getMatchCount(winnerLotto.getLottoNumbers().getNumbers());
-        boolean bonusResult = lottoNumbers.isBonusMatched(bonus);
+        boolean bonusResult = bonus.isBonusMatched(lottoNumbers.getNumbers());
 
         return LottoRank.getRank(match, bonusResult);
     }

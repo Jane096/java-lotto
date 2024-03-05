@@ -1,21 +1,17 @@
 package refactoring.model;
 
-import java.util.Objects;
+import java.util.Set;
 
 import static refactoring.constants.LottoNumberConstants.MAX_LOTTO_NUMBER;
 import static refactoring.constants.LottoNumberConstants.MIN_LOTTO_NUMBER;
 
-public class LottoNumber {
+public class BonusNumber {
 
     private final int number;
 
-    private LottoNumber(int number) {
+    public BonusNumber(int number) {
         validate(number);
         this.number = number;
-    }
-
-    public static LottoNumber of(int number) {
-        return new LottoNumber(number);
     }
 
     private static void validate(int numbers) {
@@ -28,16 +24,8 @@ public class LottoNumber {
         return this.number;
     }
 
-    @Override
-    public int hashCode() {
-        return Objects.hash(number);
-    }
-
-    @Override
-    public boolean equals(Object obj) {
-        if (this == obj) return true;
-        if (obj == null || getClass() != obj.getClass()) return false;
-        LottoNumber that = (LottoNumber) obj;
-        return number == that.number;
+    public boolean isBonusMatched(Set<LottoNumber> numbers) {
+        return numbers.stream()
+                .anyMatch(number -> number.getNumber() == this.number);
     }
 }

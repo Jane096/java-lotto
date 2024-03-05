@@ -6,6 +6,7 @@ import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.CsvSource;
 import org.junit.jupiter.params.provider.MethodSource;
+import refactoring.model.BonusNumber;
 import refactoring.model.LottoNumber;
 import refactoring.model.LottoNumbers;
 
@@ -48,7 +49,7 @@ public class LottoNumbersTest {
         Set<LottoNumber> lottoNumberTest = Set.of(LottoNumber.of(14),LottoNumber.of(21),LottoNumber.of(32),LottoNumber.of(41),LottoNumber.of(25),LottoNumber.of(5));
         LottoNumbers lottoNumbers = LottoNumbers.of(lottoNumberTest);
 
-        boolean isBonusMated = lottoNumbers.isBonusMatched(LottoNumber.of(bonus));
+        boolean isBonusMated = new BonusNumber(bonus).isBonusMatched(lottoNumbers.getNumbers());
         assertThat(isBonusMated).isEqualTo(expectedResult);
     }
 
