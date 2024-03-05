@@ -30,14 +30,14 @@ public class LottosTest {
         return Stream.of(
             Arguments.of(Lottos.of(
                 List.of(
-                    Lotto.of(new ManualLottoGenerationStrategy(split("34,35,36,4,5,6")).generate()),
-                    Lotto.of(new ManualLottoGenerationStrategy(split("34,35,36,7,23,1")).generate()),
-                    Lotto.of(new ManualLottoGenerationStrategy(split("22,11,24,43,17,3")).generate()),
-                    Lotto.of(new ManualLottoGenerationStrategy(split("34,35,36,7,42,25")).generate()),
-                    Lotto.of(new ManualLottoGenerationStrategy(split("34,35,36,7,45,11")).generate()))
+                    new Lotto(new ManualLottoGenerationStrategy(split("34,35,36,4,5,6")).generate()),
+                    new Lotto(new ManualLottoGenerationStrategy(split("34,35,36,7,23,1")).generate()),
+                    new Lotto(new ManualLottoGenerationStrategy(split("22,11,24,43,17,3")).generate()),
+                    new Lotto(new ManualLottoGenerationStrategy(split("34,35,36,7,42,25")).generate()),
+                    new Lotto(new ManualLottoGenerationStrategy(split("34,35,36,7,45,11")).generate()))
                 ),
 
-                Lotto.of(new ManualLottoGenerationStrategy(split("34,35,36,7,23,3")).generate()),
+                new Lotto(new ManualLottoGenerationStrategy(split("34,35,36,7,23,3")).generate()),
                 LottoNumber.of(1),
                 finalRanks
             )

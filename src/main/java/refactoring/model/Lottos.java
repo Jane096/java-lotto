@@ -20,7 +20,7 @@ public class Lottos {
     public static Lottos of(LottoGenerateStrategy lottoGenerateStrategy, int quantity) {
         List<Lotto> lottos = new ArrayList<>();
         IntStream.range(0, quantity)
-                .forEach(e -> lottos.add(Lotto.of(lottoGenerateStrategy.generate())));
+                .forEach(e -> lottos.add(new Lotto(lottoGenerateStrategy.generate())));
 
         return new Lottos(lottos);
     }

@@ -19,10 +19,10 @@ public class LottoTest {
 
     static Stream<Arguments> generateData() {
         return Stream.of(
-            Arguments.of(Lotto.of(new ManualLottoGenerationStrategy(split("1,2,3,4,5,6")).generate()), Lotto.of(new ManualLottoGenerationStrategy(split("1,2,3,11,45,23")).generate()), LottoNumber.of(24), FIFTH),
-            Arguments.of(Lotto.of(new ManualLottoGenerationStrategy(split("34,35,36,7,23,1")).generate()), Lotto.of(new ManualLottoGenerationStrategy(split("34,35,36,7,24,9")).generate()), LottoNumber.of(30), FOURTH),
-            Arguments.of(Lotto.of(new ManualLottoGenerationStrategy(split("22,11,24,43,17,3")).generate()), Lotto.of(new ManualLottoGenerationStrategy(split("22,11,24,43,17,8")).generate()), LottoNumber.of(13), THIRD),
-            Arguments.of(Lotto.of(new ManualLottoGenerationStrategy(split("1,9,29,33,42,25")).generate()), Lotto.of(new ManualLottoGenerationStrategy(split("1,9,29,33,42,17")).generate()), LottoNumber.of(17), SECOND)
+            Arguments.of(new Lotto(new ManualLottoGenerationStrategy(split("1,2,3,4,5,6")).generate()), new Lotto(new ManualLottoGenerationStrategy(split("1,2,3,11,45,23")).generate()), LottoNumber.of(24), FIFTH),
+            Arguments.of(new Lotto(new ManualLottoGenerationStrategy(split("34,35,36,7,23,1")).generate()), new Lotto(new ManualLottoGenerationStrategy(split("34,35,36,7,24,9")).generate()), LottoNumber.of(30), FOURTH),
+            Arguments.of(new Lotto(new ManualLottoGenerationStrategy(split("22,11,24,43,17,3")).generate()), new Lotto(new ManualLottoGenerationStrategy(split("22,11,24,43,17,8")).generate()), LottoNumber.of(13), THIRD),
+            Arguments.of(new Lotto(new ManualLottoGenerationStrategy(split("1,9,29,33,42,25")).generate()), new Lotto(new ManualLottoGenerationStrategy(split("1,9,29,33,42,17")).generate()), LottoNumber.of(17), SECOND)
         );
     }
 
