@@ -1,7 +1,5 @@
 package refactoring.model;
 
-import refactoring.enumeration.LottoRank;
-
 import java.util.Arrays;
 
 public class Lotto {
@@ -12,11 +10,8 @@ public class Lotto {
         this.lottoNumbers = lottoNumbers;
     }
 
-    public LottoRank findRank(Lotto winnerLotto, LottoNumber bonus) {
-        int match = this.lottoNumbers.getMatchCount(winnerLotto.lottoNumbers.getNumbers());
-        boolean bonusResult = this.lottoNumbers.isBonusMatched(bonus);
-
-        return LottoRank.getRank(match, bonusResult);
+    public LottoNumbers getLottoNumbers() {
+        return this.lottoNumbers;
     }
 
     @Override

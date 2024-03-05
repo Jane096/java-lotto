@@ -30,7 +30,7 @@ public class LottoTest {
     @MethodSource("generateData")
     @DisplayName("생성된 로또와 당첨번호가 서로 일치하는지 확인하고 등급을 리턴한다.")
     void lottoFindRankTest(Lotto winLotto, Lotto lotto, LottoNumber bonus, LottoRank expectedRank) {
-        LottoRank lottoRank = lotto.findRank(winLotto, bonus);
+        LottoRank lottoRank = LottoRank.findRank(winLotto, bonus, lotto.getLottoNumbers());
         assertThat(lottoRank).isEqualTo(expectedRank);
     }
 }
