@@ -1,9 +1,5 @@
 package refactoring.enumeration;
 
-import refactoring.model.Lotto;
-import refactoring.model.LottoNumber;
-import refactoring.model.LottoNumbers;
-
 import java.util.Arrays;
 import java.util.EnumMap;
 import java.util.List;
@@ -57,12 +53,5 @@ public enum LottoRank {
         Map<LottoRank, Integer> winnerBoard = new EnumMap<>(LottoRank.class);
         ALL_LOTTO_RANK.forEach(rank -> winnerBoard.put(rank, 0));
         return winnerBoard;
-    }
-
-    public static LottoRank findRank(Lotto winnerLotto, LottoNumber bonus, LottoNumbers lottoNumbers) {
-        int match = lottoNumbers.getMatchCount(winnerLotto.getLottoNumbers().getNumbers());
-        boolean bonusResult = lottoNumbers.isBonusMatched(bonus);
-
-        return LottoRank.getRank(match, bonusResult);
     }
 }
