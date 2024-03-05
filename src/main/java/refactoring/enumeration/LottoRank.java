@@ -28,7 +28,7 @@ public enum LottoRank {
         this.message = message;
     }
 
-    public static final List<LottoRank> ALL_LOTTO_RANK = Arrays.stream(LottoRank.values()).collect(Collectors.toList());
+    private static final List<LottoRank> ALL_LOTTO_RANK = Arrays.stream(LottoRank.values()).collect(Collectors.toList());
 
     public static int getPriceByRank(LottoRank rank) {
         return rank.prize;
