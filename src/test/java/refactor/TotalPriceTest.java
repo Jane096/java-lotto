@@ -5,14 +5,14 @@ import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
 import refactoring.enumeration.LottoRank;
-import refactoring.model.Price;
+import refactoring.model.TotalPrice;
 
 import java.util.Map;
 import java.util.stream.Stream;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-public class PriceTest {
+public class TotalPriceTest {
 
     static Stream<Arguments> generateData() {
         Map<LottoRank, Integer> finalRanksFirst = LottoRank.initialize();
@@ -37,7 +37,7 @@ public class PriceTest {
     @MethodSource("generateData")
     @DisplayName("등급별 결과에 따라 총 수익금액을 합산하여 리턴한다.")
     void ofTotalPriceTest(Map<LottoRank, Integer> finalRanks, int expectedTotalPrice) {
-        Price price = Price.ofTotalPrice(finalRanks);
-        assertThat(price.getPrice()).isEqualTo(expectedTotalPrice);
+        TotalPrice total = TotalPrice.of(finalRanks);
+        assertThat(total.getTotal()).isEqualTo(expectedTotalPrice);
     }
 }
