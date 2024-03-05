@@ -1,9 +1,10 @@
 package refactoring.controller;
 
 import refactoring.model.*;
-import refactoring.strategy.AutoLottoGenerateStrategy;
 import refactoring.view.InputView;
 import refactoring.view.OutputView;
+
+import java.util.List;
 
 public class LottoRefactoringController {
 
@@ -14,14 +15,14 @@ public class LottoRefactoringController {
         Price payPrice = inputView.payPriceInput();
 
         Quantity manualQuantity = inputView.manualLottoQuantityInput();
-        Lottos manualLottos = inputView.manualLottoNumberInput(manualQuantity);
+        List<Lotto> manualLottos = inputView.manualLottoNumberInput(manualQuantity);
 
         Quantity autoQuantity = Quantity.of(payPrice);
         outputView.viewLottoCount(autoQuantity, manualQuantity);
 
-        Lottos autoLottos = Lottos.of(new AutoLottoGenerateStrategy(), autoQuantity.getQuantity());
+        List<Lotto> autoLottos = AutoLotto.make(autoQuantity.getQuantity());
 
-        Lottos allLottos = Lottos.getAll(autoLottos, manualLottos);
+        Lottos allLottos = Lottos.sumAllLottos(autoLottos, manualLottos);
         outputView.viewLotto(allLottos);
 
         Lotto winLotto = inputView.putLastWinNumbers();
