@@ -1,15 +1,14 @@
 package refactoring.view;
 
-import refactoring.model.Lottos;
-import refactoring.model.Lotto;
-import refactoring.model.Price;
-import refactoring.model.Quantity;
+import refactoring.model.*;
 import refactoring.strategy.ManualLottoGenerationStrategy;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Scanner;
 import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 
 public class InputView {
 
@@ -50,11 +49,16 @@ public class InputView {
         return Quantity.of(quantity);
     }
 
-    public Lottos manualLottoNumberInput(Quantity quantity) {
+    public List<Lotto> manualLottoNumberInput(Quantity quantity) {
         scanner.nextLine();
         System.out.println(MANUAL_LOTTO_NUMBERS);
 
-        return Lottos.of(new ManualLottoGenerationStrategy(split(scanner.nextLine())), quantity.getQuantity());
+        List<String> numbers = new ArrayList<>();
+
+        IntStream.range(0, quantity.getQuantity())
+                .forEach(e -> numbers.add(scanner.nextLine()));
+
+        return new ManualLotto(numbers).make();
     }
 
     private Lotto generateWinnerLotto(String value){

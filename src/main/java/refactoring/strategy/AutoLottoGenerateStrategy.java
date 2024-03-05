@@ -12,14 +12,14 @@ import static java.util.Collections.shuffle;
 
 public class AutoLottoGenerateStrategy implements LottoGenerateStrategy {
 
-    protected final List<Integer> allLottoNumbers = IntStream.range(1, 46).boxed().collect(Collectors.toList());
+    protected static final List<Integer> ALL_LOTTO_NUMBERS = IntStream.range(1, 46).boxed().collect(Collectors.toList());
     private static final int MAX_LOTTO_SIZE = 6;
 
     @Override
     public LottoNumbers generate() {
-        shuffle(this.allLottoNumbers);
+        shuffle(ALL_LOTTO_NUMBERS);
 
-        Set<LottoNumber> lottoNumbers = this.allLottoNumbers.stream().limit(MAX_LOTTO_SIZE)
+        Set<LottoNumber> lottoNumbers = ALL_LOTTO_NUMBERS.stream().limit(MAX_LOTTO_SIZE)
                 .map(LottoNumber::of)
                 .collect(Collectors.toSet());
 
