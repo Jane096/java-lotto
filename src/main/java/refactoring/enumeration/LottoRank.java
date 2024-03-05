@@ -21,7 +21,7 @@ public enum LottoRank {
     private final BiFunction<Integer, Boolean, Boolean> condition;
     private final String message;
 
-    LottoRank(int match, int prize, BiFunction<Integer, Boolean, Boolean> condition, String message) {
+    private LottoRank(int match, int prize, BiFunction<Integer, Boolean, Boolean> condition, String message) {
         this.match = match;
         this.prize = prize;
         this.condition = condition;
