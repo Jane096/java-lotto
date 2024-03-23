@@ -6,6 +6,7 @@ import java.util.Set;
 public class LottoNumbers {
 
     private static final int MIN_LOTTO_SIZE = 6;
+
     private final Set<LottoNumber> numbers;
 
     private LottoNumbers(Set<LottoNumber> numbers) {
@@ -21,10 +22,6 @@ public class LottoNumbers {
         return (int) this.numbers.stream()
                 .filter(winNumbers::contains)
                 .count();
-    }
-
-    public boolean isBonusMatched(LottoNumber bonus) {
-        return this.numbers.contains(bonus);
     }
 
     public Set<LottoNumber> getNumbers() {

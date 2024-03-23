@@ -5,40 +5,52 @@ import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
 import refactoring.enumeration.LottoRank;
-import refactoring.model.LottoRanks;
+import refactoring.model.*;
+import refactoring.strategy.ManualLottoGenerationStrategy;
 
+import java.util.List;
 import java.util.Map;
 import java.util.stream.Stream;
 
-import static org.assertj.core.api.Assertions.assertThat;
+import static org.junit.jupiter.api.Assertions.assertAll;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static refactoring.constants.SplitStringUtils.split;
 
 public class LottoRanksTest {
 
     static Stream<Arguments> generateData() {
-        Map<LottoRank, Integer> finalRanksFirst = LottoRank.initialize();
-        finalRanksFirst.put(LottoRank.SECOND, 1);
-        finalRanksFirst.put(LottoRank.FOURTH, 2);
-        finalRanksFirst.put(LottoRank.FIFTH, 1);
-
-        Map<LottoRank, Integer> finalRanksSecond = LottoRank.initialize();
-        finalRanksSecond.put(LottoRank.SECOND, 2);
-        finalRanksSecond.put(LottoRank.FIFTH, 3);
-
-        Map<LottoRank, Integer> finalRanksThird = LottoRank.initialize();
-        finalRanksThird.put(LottoRank.FIRST, 1);
+        Map<LottoRank, Integer> finalRanks = LottoRank.initialize();
+        finalRanks.put(LottoRank.SECOND, 1);
+        finalRanks.put(LottoRank.FOURTH, 2);
+        finalRanks.put(LottoRank.FIFTH, 1);
 
         return Stream.of(
-                Arguments.of(finalRanksFirst, 4000, 7513.75),
-                Arguments.of(finalRanksSecond, 5000, 6001.0),
-                Arguments.of(finalRanksThird, 1000, 2000000.0));
+                Arguments.of(new Lottos(
+                                List.of(
+                                        new Lotto(new ManualLottoGenerationStrategy(split("34,35,36,4,5,6")).generate()),
+                                        new Lotto(new ManualLottoGenerationStrategy(split("34,35,36,7,23,1")).generate()),
+                                        new Lotto(new ManualLottoGenerationStrategy(split("22,11,24,43,17,3")).generate()),
+                                        new Lotto(new ManualLottoGenerationStrategy(split("34,35,36,7,42,25")).generate()),
+                                        new Lotto(new ManualLottoGenerationStrategy(split("34,35,36,7,45,11")).generate()))
+                        ),
+
+                        WinLotto.make("34,35,36,7,23,3"),
+                        new BonusNumber(1),
+                        finalRanks
+                )
+        );
     }
 
     @ParameterizedTest
     @MethodSource("generateData")
-    @DisplayName("등급별 결과에 따른 가격을 계산하여 총 수익률을 구한다.")
-    void getRatingTest(Map<LottoRank, Integer> finalRanks, int payPrice, Double expectedRating) {
-        LottoRanks lottoRanks = LottoRanks.of(finalRanks);
-        Double rating = lottoRanks.getRating(payPrice, finalRanks);
-        assertThat(rating).isEqualTo(expectedRating);
+    @DisplayName("생성 된 로또의 당첨번호를 매칭하여 각 등급별 카운트 수를 리턴한다.")
+    void getWinnerNumberMatchCountTest(Lottos lottos, Lotto winLotto, BonusNumber bonus, Map<LottoRank, Integer> expectedRanks) {
+        LottoRanks resultRanks = LottoRanks.finalRanks(winLotto, bonus, lottos);
+
+        assertAll(
+                () -> assertEquals(resultRanks.getRank().get(LottoRank.SECOND), expectedRanks.get(LottoRank.SECOND)),
+                () -> assertEquals(resultRanks.getRank().get(LottoRank.FOURTH), expectedRanks.get(LottoRank.FOURTH)),
+                () -> assertEquals(resultRanks.getRank().get(LottoRank.FIFTH), expectedRanks.get(LottoRank.FIFTH))
+        );
     }
 }

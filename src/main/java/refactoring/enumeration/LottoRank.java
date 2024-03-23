@@ -21,14 +21,14 @@ public enum LottoRank {
     private final BiFunction<Integer, Boolean, Boolean> condition;
     private final String message;
 
-    LottoRank(int match, int prize, BiFunction<Integer, Boolean, Boolean> condition, String message) {
+    private LottoRank(int match, int prize, BiFunction<Integer, Boolean, Boolean> condition, String message) {
         this.match = match;
         this.prize = prize;
         this.condition = condition;
         this.message = message;
     }
 
-    public static final List<LottoRank> ALL_LOTTO_RANK = Arrays.stream(LottoRank.values()).collect(Collectors.toList());
+    private static final List<LottoRank> ALL_LOTTO_RANK = Arrays.stream(LottoRank.values()).collect(Collectors.toList());
 
     public static int getPriceByRank(LottoRank rank) {
         return rank.prize;

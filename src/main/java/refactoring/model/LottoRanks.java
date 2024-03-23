@@ -13,7 +13,13 @@ public class LottoRanks {
         this.ranks = ranks;
     }
 
-    public static LottoRanks of(Map<LottoRank, Integer> ranks) {
+    public static LottoRanks finalRanks(Lotto winLotto, BonusNumber bonus, Lottos lottos) {
+        Map<LottoRank, Integer> ranks = LottoRank.initialize();
+        for (Lotto lotto : lottos.getLottos()) {
+            LottoRank lottoRank = findRank(winLotto, bonus, lotto.getLottoNumbers());
+            ranks.put(lottoRank, ranks.get(lottoRank) + 1);
+        }
+
         return new LottoRanks(ranks);
     }
 
@@ -21,8 +27,10 @@ public class LottoRanks {
         return Collections.unmodifiableMap(this.ranks);
     }
 
-    public Double getRating(int payPrice, Map<LottoRank, Integer> winnerBoard) {
-        Price price = Price.ofTotalPrice(winnerBoard);
-        return Math.floor(price.getPrice() * 100.0 / payPrice) / 100;
+    public static LottoRank findRank(Lotto winnerLotto, BonusNumber bonus, LottoNumbers lottoNumbers) {
+        int match = lottoNumbers.getMatchCount(winnerLotto.getLottoNumbers().getNumbers());
+        boolean bonusResult = bonus.isBonusMatched(lottoNumbers.getNumbers());
+
+        return LottoRank.getRank(match, bonusResult);
     }
 }

@@ -1,10 +1,10 @@
 package refactoring.controller;
 
-import refactoring.model.Lottos;
 import refactoring.model.*;
-import refactoring.strategy.AutoLottoGenerateStrategy;
 import refactoring.view.InputView;
 import refactoring.view.OutputView;
+
+import java.util.List;
 
 public class LottoRefactoringController {
 
@@ -15,21 +15,21 @@ public class LottoRefactoringController {
         Price payPrice = inputView.payPriceInput();
 
         Quantity manualQuantity = inputView.manualLottoQuantityInput();
-        Lottos manualLottos = inputView.manualLottoNumberInput(manualQuantity);
+        List<Lotto> manualLottos = inputView.manualLottoNumberInput(manualQuantity);
 
         Quantity autoQuantity = Quantity.of(payPrice);
         outputView.viewLottoCount(autoQuantity, manualQuantity);
 
-        Lottos autoLottos = Lottos.of(new AutoLottoGenerateStrategy(), autoQuantity.getQuantity());
+        List<Lotto> autoLottos = AutoLotto.make(autoQuantity.getQuantity());
 
-        Lottos allLottos = Lottos.getAll(autoLottos, manualLottos);
+        Lottos allLottos = Lottos.sumAllLottos(autoLottos, manualLottos);
         outputView.viewLotto(allLottos);
 
         Lotto winLotto = inputView.putLastWinNumbers();
-        LottoNumber bonus = LottoNumber.of(inputView.bonusNumberInput());
-        LottoRanks lottoRanks = LottoRanks.of(allLottos.getWinnerNumberMatchCount(winLotto, bonus));
+        BonusNumber bonus = new BonusNumber(inputView.bonusNumberInput());
+        LottoRanks lottoRanks = LottoRanks.finalRanks(winLotto, bonus, allLottos);
         outputView.viewLottoRating(lottoRanks.getRank());
 
-        outputView.viewRating(lottoRanks.getRating(payPrice.getPrice(), lottoRanks.getRank()));
+        outputView.viewRating(new Rating(payPrice).getRating(lottoRanks.getRank()));
     }
 }
