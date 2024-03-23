@@ -3,10 +3,8 @@ package refactoring.view;
 import refactoring.model.*;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 import java.util.Scanner;
-import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
 public class InputView {
@@ -33,13 +31,6 @@ public class InputView {
         System.out.println(PUT_BONUS_NUMBER);
         return scanner.nextInt();
     }
-
-    public static List<Integer> split(String value){
-        return Arrays.stream(value.split(","))
-                .map(Integer::parseInt)
-                .collect(Collectors.toList());
-    }
-
 
     public Quantity manualLottoQuantityInput() {
         scanner.nextLine();
