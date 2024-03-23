@@ -6,14 +6,14 @@ import java.util.Map;
 
 public class Rating {
 
-    private final Price price;
+    private final Map<LottoRank, Integer> winnerBoard;
 
-    public Rating(Price price) {
-        this.price = price;
+    public Rating(Map<LottoRank, Integer> winnerBoard) {
+        this.winnerBoard = winnerBoard;
     }
 
-    public Double getRating(Map<LottoRank, Integer> winnerBoard) {
-        TotalPrice totalPrice = TotalPrice.of(winnerBoard);
-        return Math.floor(totalPrice.getTotal() * 100.0 / this.price.getPrice()) / 100;
+    public Double getRating(Price price) {
+        TotalPrice totalPrice = TotalPrice.of(this.winnerBoard);
+        return Math.floor(totalPrice.getTotal() * 100.0 / price.getPrice()) / 100;
     }
 }

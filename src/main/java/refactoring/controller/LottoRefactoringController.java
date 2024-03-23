@@ -30,6 +30,6 @@ public class LottoRefactoringController {
         LottoRanks lottoRanks = LottoRanks.finalRanks(winLotto, bonus, allLottos);
         outputView.viewLottoRating(lottoRanks.getRank());
 
-        outputView.viewRating(new Rating(payPrice).getRating(lottoRanks.getRank()));
+        outputView.viewRating(new Rating(lottoRanks.getRank()).getRating(payPrice));
     }
 }

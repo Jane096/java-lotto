@@ -38,7 +38,7 @@ public class RatingTest {
     @MethodSource("generateData")
     @DisplayName("등급별 결과에 따른 가격을 계산하여 총 수익률을 구한다.")
     void getRatingTest(Map<LottoRank, Integer> finalRanks, int payPrice, Double expectedRating) {
-        Double rating = new Rating(Price.of(payPrice)).getRating(finalRanks);
+        Double rating = new Rating(finalRanks).getRating(Price.of(payPrice));
         assertThat(rating).isEqualTo(expectedRating);
     }
 }
