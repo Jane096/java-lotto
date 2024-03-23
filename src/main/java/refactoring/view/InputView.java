@@ -36,7 +36,7 @@ public class InputView {
         return scanner.nextInt();
     }
 
-    private static List<Integer> split(String value){
+    public static List<Integer> split(String value){
         return Arrays.stream(value.split(","))
                 .map(Integer::parseInt)
                 .collect(Collectors.toList());
