@@ -25,7 +25,7 @@ public class LottoRefactoringController {
         Lottos allLottos = Lottos.sumAllLottos(autoLottos, manualLottos);
         outputView.viewLotto(allLottos);
 
-        Lotto winLotto = inputView.putLastWinNumbers();
+        WinLotto winLotto = inputView.putLastWinNumbers();
         BonusNumber bonus = new BonusNumber(inputView.bonusNumberInput());
         LottoRanks lottoRanks = LottoRanks.finalRanks(winLotto, bonus, allLottos);
         outputView.viewLottoRating(lottoRanks.getRank());

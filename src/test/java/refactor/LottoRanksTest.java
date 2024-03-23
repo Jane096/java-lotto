@@ -44,7 +44,7 @@ public class LottoRanksTest {
     @ParameterizedTest
     @MethodSource("generateData")
     @DisplayName("생성 된 로또의 당첨번호를 매칭하여 각 등급별 카운트 수를 리턴한다.")
-    void getWinnerNumberMatchCountTest(Lottos lottos, Lotto winLotto, BonusNumber bonus, Map<LottoRank, Integer> expectedRanks) {
+    void getWinnerNumberMatchCountTest(Lottos lottos, WinLotto winLotto, BonusNumber bonus, Map<LottoRank, Integer> expectedRanks) {
         LottoRanks resultRanks = LottoRanks.finalRanks(winLotto, bonus, lottos);
 
         assertAll(

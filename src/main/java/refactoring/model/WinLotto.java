@@ -2,7 +2,9 @@ package refactoring.model;
 
 import refactoring.strategy.ManualLottoGenerationStrategy;
 
+import java.util.Collections;
 import java.util.List;
+import java.util.Set;
 
 import static refactoring.constants.SplitStringUtils.split;
 
@@ -14,12 +16,17 @@ public class WinLotto {
         this.lotto = lotto;
     }
 
-    public static Lotto make(String numbers) {
+    public static WinLotto make(String numbers) {
         List<Integer> splitedNumbers = split(numbers);
-        return new Lotto(new ManualLottoGenerationStrategy(splitedNumbers).generate());
+        Lotto lotto = new Lotto(new ManualLottoGenerationStrategy(splitedNumbers).generate());
+        return new WinLotto(lotto);
     }
 
     public Lotto getLotto() {
         return this.lotto;
+    }
+
+    public Set<LottoNumber> getWinNumbers() {
+        return Collections.unmodifiableSet(this.lotto.getLottoNumbers().getNumbers());
     }
 }

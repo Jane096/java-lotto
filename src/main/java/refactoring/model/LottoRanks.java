@@ -13,7 +13,7 @@ public class LottoRanks {
         this.ranks = ranks;
     }
 
-    public static LottoRanks finalRanks(Lotto winLotto, BonusNumber bonus, Lottos lottos) {
+    public static LottoRanks finalRanks(WinLotto winLotto, BonusNumber bonus, Lottos lottos) {
         Map<LottoRank, Integer> ranks = LottoRank.initialize();
         for (Lotto lotto : lottos.getLottos()) {
             LottoRank lottoRank = findRank(winLotto, bonus, lotto.getLottoNumbers());
@@ -27,8 +27,8 @@ public class LottoRanks {
         return Collections.unmodifiableMap(this.ranks);
     }
 
-    public static LottoRank findRank(Lotto winnerLotto, BonusNumber bonus, LottoNumbers lottoNumbers) {
-        int match = lottoNumbers.getMatchCount(winnerLotto.getLottoNumbers().getNumbers());
+    public static LottoRank findRank(WinLotto winLotto, BonusNumber bonus, LottoNumbers lottoNumbers) {
+        int match = lottoNumbers.getMatchCount(winLotto.getWinNumbers());
         boolean bonusResult = bonus.isBonusMatched(lottoNumbers.getNumbers());
 
         return LottoRank.getRank(match, bonusResult);

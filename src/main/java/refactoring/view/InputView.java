@@ -24,7 +24,7 @@ public class InputView {
         return Price.of(scanner.nextInt());
     }
 
-    public Lotto putLastWinNumbers() {
+    public WinLotto putLastWinNumbers() {
         System.out.println(PUT_LAST_WIN_NUMBERS);
         return generateWinnerLotto(scanner.nextLine());
     }
@@ -60,7 +60,7 @@ public class InputView {
         return new ManualLotto(numbers).make();
     }
 
-    private Lotto generateWinnerLotto(String value){
+    private WinLotto generateWinnerLotto(String value){
         return WinLotto.make(value);
     }
 }

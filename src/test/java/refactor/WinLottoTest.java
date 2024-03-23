@@ -3,7 +3,6 @@ package refactor;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
-import refactoring.model.Lotto;
 import refactoring.model.LottoNumber;
 import refactoring.model.LottoNumbers;
 import refactoring.model.WinLotto;
@@ -22,9 +21,9 @@ public class WinLottoTest {
     @ValueSource(strings = {"1,2,3,4,5,6", "3,4,5,6,7,8", "13,25,45,36,7,24", "34,11,5,43,27,9"})
     @DisplayName("로또 숫자에 포함된 숫자를 입력할 경우 정상적으로 당첨번호 로또를 생성한다.")
     void makeTest(String numbers) {
-        Lotto lotto = WinLotto.make(numbers);
+        WinLotto winLotto = WinLotto.make(numbers);
 
-        Set<LottoNumber> lottoNumbers = lotto.getLottoNumbers().getNumbers();
+        Set<LottoNumber> lottoNumbers = winLotto.getWinNumbers();
         List<Integer> splitedNumbers = split(numbers);
         LottoNumbers lottoNumbersExpected = new ManualLottoGenerationStrategy(splitedNumbers).generate();
 
